@@ -4,11 +4,10 @@ import fact.it.edgeservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -94,5 +93,39 @@ public class BookingController {
             customers.add(responseEntityCustomers.getBody().get(0));
         }
         return customers;
+    }
+
+    @PostMapping("/bookings/hotels")
+    public Hotel addHotel(@RequestBody Hotel newHotel){
+        Hotel hotel =
+                restTemplate.postForObject("http://" + hotelserviceBaseUrl + "/hotels",
+                        newHotel,Hotel.class);
+        return hotel;
+    }
+
+    @PutMapping("/bookings/hotels")
+    public Hotel updateHotel(@RequestBody Hotel updateHotel){
+
+        Hotel hotel =
+                restTemplate.getForObject("http://" + hotelserviceBaseUrl + "/hotels/" + updateHotel.getHotelCode(),
+                        Hotel.class);
+        hotel.setName(updateHotel.getName());
+        hotel.setCity(updateHotel.getCity());
+        hotel.setStreet(updateHotel.getStreet());
+        hotel.setNumber(updateHotel.getNumber());
+
+        ResponseEntity<Hotel> responseEntityHotel =
+                restTemplate.exchange("http://" + hotelserviceBaseUrl + "/hotels/" + updateHotel.getHotelCode(),
+                        HttpMethod.PUT, new HttpEntity<>(hotel), Hotel.class);
+
+        return responseEntityHotel.getBody();
+    }
+
+    @DeleteMapping("/bookings/customers/{customerCode}")
+    public ResponseEntity deleteCustomer(@PathVariable String customerCode){
+
+        restTemplate.delete("http://" + customerserviceBaseUrl + "/customers/" + customerCode );
+
+        return ResponseEntity.ok().build();
     }
 }
