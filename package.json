@@ -1,0 +1,19 @@
+{
+  "name": "apt5-edge-microservices",
+  "version": "1.0.0",
+  "description": "![image](https://user-images.githubusercontent.com/45179544/98289953-3a1f5c80-1fa9-11eb-9d37-36dd563427d1.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "mvn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinv2006/apt5-edge-microservices.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinv2006/apt5-edge-microservices/issues"
+  },
+  "homepage": "https://github.com/robinv2006/apt5-edge-microservices#readme"
+}
