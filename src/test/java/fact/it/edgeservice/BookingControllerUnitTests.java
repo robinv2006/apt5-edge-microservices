@@ -170,4 +170,74 @@ public class BookingControllerUnitTests {
                 .andExpect(jsonPath("$[0].street", is("Straat1")))
                 .andExpect(jsonPath("$[0].number", is(1)));
     }
+
+
+    @Test
+    public void whenAddHotel_thenReturnHotelJson() throws Exception{
+        Hotel hotel = new Hotel("H09", "Den Delper", "Geel", "GeelWest", 162);
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + hotelServiceBaseUrl + "/hotels")))
+                .andExpect(method(HttpMethod.POST))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(hotel))
+                );
+
+        mockMvc.perform(post("/bookings/hotels")
+                .content(mapper.writeValueAsString(hotel))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.hotelCode", is("H09")))
+                .andExpect(jsonPath("$.name", is("Den Delper")))
+                .andExpect(jsonPath("$.city", is("Geel")))
+                .andExpect(jsonPath("$.street", is("GeelWest")))
+                .andExpect(jsonPath("$.number", is(162)));
+
+    }
+
+    @Test
+    public void whenUpdateHotel_thenReturnHotelJson() throws Exception{
+        Hotel updatedHotel = new Hotel("H01", "New Hotel", "New City", "New Street", 333);
+
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + hotelServiceBaseUrl + "/hotels/H01")))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(hotel1))
+                );
+
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + hotelServiceBaseUrl + "/hotels/H01")))
+                .andExpect(method(HttpMethod.PUT))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(updatedHotel))
+                );
+
+        mockMvc.perform(put("/bookings/hotels/")
+                .content(mapper.writeValueAsString(updatedHotel))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.hotelCode", is("H01")))
+                .andExpect(jsonPath("$.name", is("New Hotel")))
+                .andExpect(jsonPath("$.city", is("New City")))
+                .andExpect(jsonPath("$.street", is("New Street")))
+                .andExpect(jsonPath("$.number", is(333)));
+    }
+
+    @Test
+    public void whenDeleteCustomer_thenReturnCustomerOk() throws Exception{
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + customerServiceBaseUrl + "/customers/C01")))
+                .andExpect(method(HttpMethod.DELETE))
+                .andRespond(withStatus(HttpStatus.OK)
+                );
+
+        mockMvc.perform(delete("/bookings/customers/{customerCode}", "C01")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
