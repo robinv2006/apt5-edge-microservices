@@ -35,3 +35,16 @@ Voor het vak advanced programming hebben we 5 microservices geschreven;
 <hr>
 
 ###### Git-hub repo's
+ 4 backend-microservices:
+   - Room-service
+   ==> https://github.com/r0756055/apt5-room
+   - Hotel-service
+   ==> https://github.com/racoon0024/apt5-hotel
+   - Customer-service
+   ==> https://github.com/robinv2006/apt5-customer
+   - Employee-service
+   ==> https://github.com/r0740967/apt5-employee
+   
+ en 1 edge-microservice:
+   - Booking-service
+   ==> https://github.com/robinv2006/apt5-edge-microservices
