@@ -27,7 +27,7 @@ Voor het vak advanced programming hebben we 5 microservices geschreven;
 ![image](https://user-images.githubusercontent.com/45179544/98289953-3a1f5c80-1fa9-11eb-9d37-36dd563427d1.png)
 <img src="/DocuPics/DeleteCustomer.png" />
 <img src="/DocuPics/GetHotelCode.png" />
-get employees
+<img src="/DocuPics/GetEmployeeHotelCode.png" />
 <img src="/DocuPics/GetHotels.png" />
 <img src="/DocuPics/PostHotelCode.png" />
 <img src="/DocuPics/PutHotelCode.png" />
