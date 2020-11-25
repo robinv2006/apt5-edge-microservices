@@ -11,7 +11,12 @@ Voor het vak advanced programming hebben we 5 microservices geschreven;
    - Booking-service
 <hr>
 
+###### Entiteiten
+
+<hr>
+
 ###### ERD
+![image](https://user-images.githubusercontent.com/45240855/100238437-7b63b600-2f30-11eb-930b-87c1874191ec.png)
 
 <hr>
 
