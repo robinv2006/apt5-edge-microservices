@@ -25,7 +25,7 @@ Voor het vak advanced programming hebben we 5 microservices geschreven;
 
 ###### Swagger edge-service
 ![image](https://user-images.githubusercontent.com/45179544/98289953-3a1f5c80-1fa9-11eb-9d37-36dd563427d1.png)
-
+<img src="/DocuPics/DeleteCustomer.png" />
 <hr>
 
 ###### Git-hub repo's
