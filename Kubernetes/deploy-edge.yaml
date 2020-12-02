@@ -28,6 +28,12 @@ spec:
         env:                    # Environment variables supplied to the Pod
         - name: ROOM_SERVICE_BASEURL
           value: "room-service-server:8051"
+        - name: HOTEL_SERVICE_BASEURL
+          value: "hotel-service-server:8052"
+        - name: CUSTOMER_SERVICE_BASEURL
+          value: "customer-service-server:8053"
+        - name: EMPLOYEE_SERVICE_BASEURL
+          value: "employee-service-server:8054"
 
 
 
